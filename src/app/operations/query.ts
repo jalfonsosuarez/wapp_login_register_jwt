@@ -15,11 +15,9 @@ export const getUsers = gql`
 export const login = gql`
   query login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      ... on ResultToken {
-        status
-        message
-        token
-      }
+      status
+      message
+      token
     }
   }
 `;
@@ -27,15 +25,13 @@ export const login = gql`
 export const meData = gql`
   query {
     me {
-      ... on ResultUser {
-        status
-        message
-        user {
-          id
-          name
-          lastName
-          email
-        }
+      status
+      message
+      user {
+        id
+        name
+        lastName
+        email
       }
     }
   }

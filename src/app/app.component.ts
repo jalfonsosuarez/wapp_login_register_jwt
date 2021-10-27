@@ -15,17 +15,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.api.getUsers().subscribe( ( result ) => {
-          console.log( result );
-        });
+    // this.api.getUsers().subscribe( ( result ) => {
+    //       console.log( result );
+    //     });
 
-    this.api.login( 'joseasuarez@gmail.com', '123456' ).subscribe( ( result ) => {
-        console.log( result );
-      });
+    // this.api.login( 'joseasuarez@gmail.com', '123456' ).subscribe( ( result ) => {
+    //     console.log( result );
+    //   });
 
-    this.api.getMe('').subscribe( ( result ) => {
-      console.log( result );
-    });
+    // this.api.getMe('').subscribe( ( result ) => {
+    //   console.log( result );
+    // });
 
   }
 
