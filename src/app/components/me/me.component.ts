@@ -26,7 +26,6 @@ export class MeComponent implements OnInit {
           .subscribe( ( result: Me ) => {
             if (result.status ) {
               this.user = result.user;
-              console.log(this.user);
             } else {
               this.logOut();
             }
