@@ -52,7 +52,7 @@ export class ApiService {
         fetchPolicy: 'network-only',
         context: {
           headers: new HttpHeaders( {
-            autorization: localStorage.getItem( 'tokenJWT' )
+            authorization: localStorage.getItem( 'tokenJWT' )
           })
         }
       }

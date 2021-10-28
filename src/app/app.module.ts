@@ -8,11 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from './components/login/login.component';
+import { MeComponent } from './components/me/me.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,

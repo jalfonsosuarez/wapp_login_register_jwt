@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
+import { Me } from './me.interface';
+
 
 @Component({
   selector: 'app-me',
@@ -9,6 +11,8 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
+
+  user: any;
 
   constructor( private api: ApiService,
                private router: Router ) { }
@@ -19,14 +23,24 @@ export class MeComponent implements OnInit {
 
       this.api.getMe()
           .pipe(take(1))
-          .subscribe( ( result ) => {
-            console.log( result );
+          .subscribe( ( result: Me ) => {
+            if (result.status ) {
+              this.user = result.user;
+              console.log(this.user);
+            } else {
+              this.logOut();
+            }
           });
 
     } else {
-      this.router.navigate( [ '/login' ] );
+      this.logOut();
     }
 
+  }
+
+  logOut(): void {
+    localStorage.removeItem( 'tokenJWT' );
+    this.router.navigate( [ '/login' ] );
   }
 
 }
