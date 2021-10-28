@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { LoginData, LoginResult } from './login.interface';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   error: boolean;
 
-  constructor( private api: ApiService ) { }
+  constructor( private api: ApiService,
+               private router: Router ) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
             localStorage.removeItem( 'tokenJWT' );
           } else {
             localStorage.setItem( 'tokenJWT', result.token );
+            this.router.navigate( [ '/me' ] );
           }
         });
   }

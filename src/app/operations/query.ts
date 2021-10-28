@@ -27,11 +27,13 @@ export const meData = gql`
     me {
       status
       message
-      user {
-        id
-        name
-        lastName
-        email
+      ... on ResultUser {
+        user {
+          id
+          name
+          lastName
+          email
+        }
       }
     }
   }

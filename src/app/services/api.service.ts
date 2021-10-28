@@ -44,7 +44,7 @@ export class ApiService {
     );
   }
 
-  getMe( token: string ): Observable<any> {
+  getMe(): Observable<any> {
     return this.apollo
     .watchQuery(
       {
@@ -52,7 +52,7 @@ export class ApiService {
         fetchPolicy: 'network-only',
         context: {
           headers: new HttpHeaders( {
-            autorization: token
+            autorization: localStorage.getItem( 'tokenJWT' )
           })
         }
       }
