@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 import { Me } from './me.interface';
 
 
@@ -14,14 +14,14 @@ export class MeComponent implements OnInit {
 
   user: any;
 
-  constructor( private api: ApiService,
-               private router: Router ) { }
+  constructor( private router: Router,
+               private auth: AuthService ) { }
 
   ngOnInit(): void {
 
     if ( localStorage.getItem( 'tokenJWT' ) !== null ) {
 
-      this.api.getMe()
+      this.auth.getMe()
           .pipe(take(1))
           .subscribe( ( result: Me ) => {
             if (result.status ) {
@@ -38,6 +38,7 @@ export class MeComponent implements OnInit {
   }
 
   logOut(): void {
+    this.auth.updateStateSesion(false);
     localStorage.removeItem( 'tokenJWT' );
     this.router.navigate( [ '/login' ] );
   }

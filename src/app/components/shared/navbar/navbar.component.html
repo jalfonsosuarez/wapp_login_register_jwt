@@ -14,10 +14,10 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <a class="navbar-brand" href="#">Login register</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active" *ngIf="access">
           <a class="nav-link" [routerLink]="['me']">Perfil</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active" *ngIf="!access">
           <a class="nav-link" [routerLink]="['login']">Login</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
@@ -25,8 +25,7 @@
         </li>
       </ul>
       <form class="d-flex">
->
-        <button class="btn btn-outline-danger" type="submit">Cerrar sesión</button>
+        <button *ngIf="access" class="btn btn-outline-danger" type="submit" (click)="logOut()">Cerrar sesión</button>
       </form>
     </div>
   </div>

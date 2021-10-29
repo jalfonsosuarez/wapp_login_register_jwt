@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 import { Me } from '../me/me.interface';
 import { LoginData, LoginResult } from './login.interface';
 
@@ -22,12 +23,13 @@ export class LoginComponent implements OnInit {
   show: boolean;
 
   constructor( private api: ApiService,
-               private router: Router ) { }
+               private router: Router,
+               private auth: AuthService ) { }
 
   ngOnInit(): void {
     if ( localStorage.getItem( 'tokenJWT' ) !== null ) {
 
-      this.api.getMe()
+      this.auth.getMe()
           .pipe(take(1))
           .subscribe( ( result: Me ) => {
             if ( result.status ) {
@@ -46,8 +48,10 @@ export class LoginComponent implements OnInit {
         .subscribe( ( result: LoginResult ) => {
           this.error = !result.status;
           if ( this.error ) {
+            this.auth.updateStateSesion(false);
             localStorage.removeItem( 'tokenJWT' );
           } else {
+            this.auth.updateStateSesion(true);
             localStorage.setItem( 'tokenJWT', result.token );
             this.router.navigate( [ '/me' ] );
           }
