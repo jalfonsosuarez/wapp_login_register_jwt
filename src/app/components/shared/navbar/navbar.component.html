@@ -23,6 +23,9 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['users']">Usuarios</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['register']">Registro</a>
+        </li>
       </ul>
       <form class="d-flex">
         <button *ngIf="access" class="btn btn-outline-danger" type="submit" (click)="logOut()">Cerrar sesión</button>
