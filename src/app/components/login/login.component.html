@@ -3,8 +3,8 @@
     <div class="col-lg">
 
     </div>    
-    <div class="col-lg-4">
-        <h2>Inicio de sesión</h2>
+    <div class="col-lg-4" id="form">
+        <h2 id="form-title">Inicio de sesión</h2>
 
         <div class="alert alert-warning" role="alert" *ngIf="error">
            Usuario no es correcto.
@@ -14,7 +14,7 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input name="email" #email="ngModel" [(ngModel)]="user.email" type="email" class="form-control" id="email"
-                    aria-describedby="emailHelp" placeholder="Introdice email"
+                    aria-describedby="emailHelp" placeholder="Introduce email"
                     [ngClass]="{ 'is-valid': !email.invalid, 'is-invalid': email.invalid }" required
                     pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$">
                 <div *ngIf="email.invalid && ( email.dirty || email.touched )">
@@ -30,7 +30,7 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Introdice email"
+                <input name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Introduce contraseña"
                     [ngClass]="{ 'is-valid': !password.invalid, 'is-invalid': password.invalid }" type="password"
                     class="form-control" id="password" required>
                 <div *ngIf="password.invalid && ( password.dirty || password.touched )">
