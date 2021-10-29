@@ -24,21 +24,20 @@ export class LoginComponent implements OnInit {
 
   constructor( private api: ApiService,
                private router: Router,
-               private auth: AuthService ) { }
+               private auth: AuthService ) { 
+
+    this.auth.userVar$
+        .subscribe( (data: Me ) => {
+          if ( data === null || !data.status ) {
+            this.show = true;
+          } else {
+            this.show = false;
+          }
+        });
+  }
 
   ngOnInit(): void {
-    if ( localStorage.getItem( 'tokenJWT' ) !== null ) {
-
-      this.auth.getMe()
-          .pipe(take(1))
-          .subscribe( ( result: Me ) => {
-            if ( result.status ) {
-              this.user = result.user;
-              this.router.navigate( [ '/me' ] );
-            }
-          });
-
-    }
+    this.auth.start();
   }
 
   save(): void {

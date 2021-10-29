@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { Me } from './me.interface';
 
@@ -14,33 +12,21 @@ export class MeComponent implements OnInit {
 
   user: any;
 
-  constructor( private router: Router,
-               private auth: AuthService ) { }
+  constructor( private auth: AuthService ) {
+    this.auth.userVar$
+    .subscribe( (data: Me ) => {
+      if ( data !== null && data !== undefined ) {
+        this.user = data.user;
+      }
+    });
+  }
 
   ngOnInit(): void {
-
-    if ( localStorage.getItem( 'tokenJWT' ) !== null ) {
-
-      this.auth.getMe()
-          .pipe(take(1))
-          .subscribe( ( result: Me ) => {
-            if (result.status ) {
-              this.user = result.user;
-            } else {
-              this.logOut();
-            }
-          });
-
-    } else {
-      this.logOut();
-    }
-
+    this.auth.start();
   }
 
   logOut(): void {
-    this.auth.updateStateSesion(false);
-    localStorage.removeItem( 'tokenJWT' );
-    this.router.navigate( [ '/login' ] );
+    this.auth.logOut();
   }
 
 }

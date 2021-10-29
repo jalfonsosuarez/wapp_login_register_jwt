@@ -25,19 +25,7 @@ export class RegisterComponent implements OnInit {
                private api: ApiService ) { }
 
   ngOnInit(): void {
-    if ( localStorage.getItem( 'tokenJWT' ) !== null ) {
-      this.auth.getMe()
-          .pipe(take(1))
-          .subscribe( ( result: Me ) => {
-            if ( result.status ) {
-              this.auth.updateStateSesion( true );
-            } else {
-              this.auth.updateStateSesion( false );
-            }
-          });
-    } else {
-      this.auth.updateStateSesion( false );
-    }
+    this.auth.start();
   }
 
   save(): void {
