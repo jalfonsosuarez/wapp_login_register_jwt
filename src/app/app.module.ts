@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { MeComponent } from './components/me/me.component';
 import { UsersComponent } from './components/users/users.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MeComponent,
-    UsersComponent
+    UsersComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
