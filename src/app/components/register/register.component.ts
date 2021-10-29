@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  save() {
+  save(): void {
     this.api.register( this.register )
       .subscribe( ( data ) => {
         console.log(data);

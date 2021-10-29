@@ -46,7 +46,7 @@ export class ApiService {
     );
   }
 
-  register( user: RegisterData ) {
+  register( user: RegisterData ): Observable<any> {
     return this.apollo
         .mutate( {
           mutation: registerdata,
